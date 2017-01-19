@@ -1,0 +1,7 @@
+fr:
+  maillers:
+    email_validation:
+      confirm:
+        subject: "Confirmation de ton adresse email"
+      notice_google_apps:
+        subject: "Ton compte Google Gadz.org est créé"
