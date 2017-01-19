@@ -1,0 +1,47 @@
+fr:
+  controllers:
+    aliases:
+      flash:
+        create:
+          success: "Alias was successfully created."
+        update:
+          success: "Alias was successfully updated."
+        destroy:
+          success: "Alias was successfully destroyed."
+    era:
+      flash:
+        create:
+          failure: "Impossible d'ajouter cette adresse. Elle existe déjà ou elle ne correspond pas au format email@domaine.fr"
+        destroy:
+          failure: "Impossible de supprimer cette adresse, il n'y aurait plus de redirection."
+        confirm:
+          success: "Adresse validée et activée avec succés!"
+          not_activated: "Adresse validée! Désactivez une autre adresse pour pouvoir l'activer"
+          failure: "Impossible de confirmer cette adresse."
+        flag:
+          active:
+            success: "Adresse activée avec succés!"
+            failure: "Tu ne peux pas activer plus de %{max_actives_era} adresses en même temps"
+          inactive:
+            success: "Adresse désactivée avec succés!"
+            failure: "Erreur lors de la désactivation"
+    evd:
+      flash:
+        create:
+          success: "Email virtual domain was successfully created."
+        update:
+          success: "Email virtual domain was successfully updated."
+        destroy:
+          success: "Email virtual domain was successfully destroyed."
+    postfix_blacklist:
+      flash:
+        create:
+          success: "Postfix blacklist was successfully created."
+        update:
+          success: "Postfix blacklist was successfully updated."
+        destroy:
+          success: "Postfix blacklist was successfully destroyed."
+    setup:
+      flash:
+        setup:
+          internal_domain_address: "Tu dois renseigner une adresse qui n'est pas gérée par Gadz.org"

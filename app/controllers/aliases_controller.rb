@@ -43,7 +43,8 @@ class AliasesController < ApplicationController
 
     respond_to do |format|
       if @alias.save
-        format.html { redirect_to alias_path(@alias, search: @search), notice: 'Alias was successfully created.'}
+        format.html { redirect_to alias_path(@alias, search: @search), notice: t('controllers.aliases.flash.create.success')
+        }
         format.json { render :show, status: :created, location: @alias}
       else
         format.html { render :new, search: @search }
@@ -58,7 +59,7 @@ class AliasesController < ApplicationController
     authorize! :update, @alias
     respond_to do |format|
       if @alias.update(alias_params)
-        format.html { redirect_to alias_path(@alias, search: @search), notice: 'Alias was successfully updated.'}
+        format.html { redirect_to alias_path(@alias, search: @search), notice: t('controllers.aliases.flash.update.success')}
         format.json { render :show, status: :ok, location: @alias}
       else
         format.html { render :edit, search: @search }
@@ -73,7 +74,7 @@ class AliasesController < ApplicationController
     authorize! :destroy, @alias
     @alias.destroy
     respond_to do |format|
-      format.html { redirect_to aliases_path(@alias, search: @search), notice: 'Alias was successfully destroyed.' }
+      format.html { redirect_to aliases_path(@alias, search: @search), notice: t('controllers.aliases.flash.destroy.success') }
       format.json { head :no_content }
     end
   end

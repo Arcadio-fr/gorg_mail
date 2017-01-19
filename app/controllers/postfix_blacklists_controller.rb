@@ -28,7 +28,7 @@ class PostfixBlacklistsController < ApplicationController
 
     respond_to do |format|
       if @postfix_blacklist.save
-        format.html { redirect_to @postfix_blacklist, notice: 'Postfix blacklist was successfully created.' }
+        format.html { redirect_to @postfix_blacklist, notice: t('controllers.postfix_blacklist.flash.create.success') }
         format.json { render :show, status: :created, location: @postfix_blacklist }
       else
         format.html { render :new }
@@ -43,7 +43,7 @@ class PostfixBlacklistsController < ApplicationController
     authorize! :update, @postfix_blacklist
     respond_to do |format|
       if @postfix_blacklist.update(postfix_blacklist_params)
-        format.html { redirect_to @postfix_blacklist, notice: 'Postfix blacklist was successfully updated.' }
+        format.html { redirect_to @postfix_blacklist, notice: t('controllers.postfix_blacklist.flash.update.success') }
         format.json { render :show, status: :ok, location: @postfix_blacklist }
       else
         format.html { render :edit }
@@ -58,7 +58,7 @@ class PostfixBlacklistsController < ApplicationController
     authorize! :destroy, @postfix_blacklist
     @postfix_blacklist.destroy
     respond_to do |format|
-      format.html { redirect_to postfix_blacklists_url, notice: 'Postfix blacklist was successfully destroyed.' }
+      format.html { redirect_to postfix_blacklists_url, notice: t('controllers.postfix_blacklist.flash.destroy.success') }
       format.json { head :no_content }
     end
   end

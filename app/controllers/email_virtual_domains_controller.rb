@@ -27,7 +27,7 @@ class EmailVirtualDomainsController < ApplicationController
 
     respond_to do |format|
       if @email_virtual_domain.save
-        format.html { redirect_to @email_virtual_domain, notice: 'Email virtual domain was successfully created.' }
+        format.html { redirect_to @email_virtual_domain, notice: t('controllers.evd.flash.create.success') }
         format.json { render :show, status: :created, location: @email_virtual_domain }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class EmailVirtualDomainsController < ApplicationController
     authorize! :update, @email_virtual_domain
     respond_to do |format|
       if @email_virtual_domain.update(email_virtual_domain_params)
-        format.html { redirect_to @email_virtual_domain, notice: 'Email virtual domain was successfully updated.' }
+        format.html { redirect_to @email_virtual_domain, notice: t('controllers.evd.flash.update.success') }
         format.json { render :show, status: :ok, location: @email_virtual_domain }
       else
         format.html { render :edit }
@@ -57,7 +57,7 @@ class EmailVirtualDomainsController < ApplicationController
     authorize! :destroy, @email_virtual_domain
     @email_virtual_domain.destroy
     respond_to do |format|
-      format.html { redirect_to email_virtual_domains_url, notice: 'Email virtual domain was successfully destroyed.' }
+      format.html { redirect_to email_virtual_domains_url, notice: t('controllers.evd.flash.destroy.success') }
       format.json { head :no_content }
     end
   end

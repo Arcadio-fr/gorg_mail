@@ -34,7 +34,7 @@ class SetupController < ApplicationController
 
     respond_to do |format|
       if @email_redirect_account.is_internal_domains_address?
-        format.html { redirect_to setup_path, notice: "Tu dois renseigner une adresse qui n'est pas gérée par Gadz.org" }
+        format.html { redirect_to setup_path, notice: t('controllers.setup.flash.setup.internal_domain_address') }
       else
         authorize! :create, @email_redirect_account
         @email_redirect_account.type_redir = "smtp"
