@@ -31,22 +31,21 @@
 
 
 class EmailRedirectAccount < ActiveRecord::Base
-	belongs_to :user
+  belongs_to :user
 
   FLAGS=%w(active inactive broken)
+  #Does not allow internal domains
+  validates :redirect, format: {without: Regexp.union(EmailVirtualDomain.pluck('CONCAT("@",name)'))} #,message: I18n.t('activerecord.validations.email_redirect_account.domain')}
 
   validates :redirect, presence: true,
             uniqueness: {:scope => :user_id},
             email: true,
-            format: {with: /\A([^@+\s\'\`]+)@((?!#{Regexp.union(EmailVirtualDomain.pluck(:name))})(?:[-a-z0-9]+\.)+[a-z]{2,})\z/i}
-  #Validate email format
-            #Why are '+' not valid in local part ?
+            format: {with: /\A([^@+\s\'\`]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i}   #Validate email format ; Why are '+' not valid in local part ?
 
-            #Does not allow internal domains
-  validates :redirect, format: {without: Regexp.union(EmailVirtualDomain.pluck('CONCAT("@",name)'))}#,message: I18n.t('activerecord.validations.email_redirect_account.domain')}
 
-  validates :flag, occurencies: {only:['active'], max: Configurable.max_actives_era,:scope => :user_id, where: {type_redir: 'smtp'}}
-  validates :flag, inclusion: { in: FLAGS}
+
+  validates :flag, occurencies: {only: ['active'], max: Configurable.max_actives_era, :scope => :user_id, where: {type_redir: 'smtp'}}
+  validates :flag, inclusion: {in: FLAGS}
 
 
   after_create :email_redirect_account_completer
@@ -71,9 +70,11 @@ class EmailRedirectAccount < ActiveRecord::Base
   def set_confirmed
     self.update_attributes(confirmed: true)
   end
+
   def set_unconfirmed
     self.update_attributes(confirmed: false)
   end
+
   #alias_method :confirmed?, :confirmed
 
   def set_active_and_confirm
