@@ -20,12 +20,12 @@ RSpec.describe EmailRedirectAccount, type: :model do
       it "does not validate" do
         era=FactoryGirl.build(:email_redirect_account,redirect: "local@#{EmailVirtualDomain.first.name}")
         puts era.inspect
-        puts regex=Regexp.union(EmailVirtualDomain.pluck('CONCAT("@",name)')).to_s
+        puts regex=Regexp.union(EmailVirtualDomain.pluck('CONCAT("@",name)'))
         puts 'does it match ?'
-        puts regex.match(era.redirect)
+        puts regex.match(era.redirect).to_s
         puts
         puts "without '@'"
-        puts regex=Regexp.union(EmailVirtualDomain.pluck(:name)).to_s
+        puts regex=Regexp.union(EmailVirtualDomain.pluck(:name))
         puts 'does it match ?'
         puts regex.match(era.redirect)
 
