@@ -18,8 +18,18 @@ RSpec.describe EmailRedirectAccount, type: :model do
 
     describe "does not accept internal email addresses as redirection" do
       it "does not validate" do
-        puts Regexp.union(EmailVirtualDomain.pluck('CONCAT("@",name)')).to_s
-        expect(FactoryGirl.build(:email_redirect_account,redirect: "local@#{EmailVirtualDomain.first.name}")).not_to be_valid
+        era=FactoryGirl.build(:email_redirect_account,redirect: "local@#{EmailVirtualDomain.first.name}")
+        puts era.inspect
+        puts regex=Regexp.union(EmailVirtualDomain.pluck('CONCAT("@",name)')).to_s
+        puts 'does it match ?'
+        puts regex.match(era.redirect)
+        puts
+        puts "without '@'"
+        puts regex=Regexp.union(EmailVirtualDomain.pluck(:name)).to_s
+        puts 'does it match ?'
+        puts regex.match(era.redirect)
+
+        expect(era).not_to be_valid
       end
 
       it "add an error message" do
