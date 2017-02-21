@@ -37,10 +37,10 @@ class EmailRedirectAccount < ActiveRecord::Base
   #Does not allow internal domains
   validates :redirect, format: {without: Regexp.union(EmailVirtualDomain.pluck('CONCAT("@",name)'))} #,message: I18n.t('activerecord.validations.email_redirect_account.domain')}
 
-  validates :redirect, presence: true,
-            uniqueness: {:scope => :user_id},
-            email: true,
-            format: {with: /\A([^@+\s\'\`]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i}   #Validate email format ; Why are '+' not valid in local part ?
+  # validates :redirect, presence: true,
+  #           uniqueness: {:scope => :user_id},
+  #           email: true,
+  #           format: {with: /\A([^@+\s\'\`]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i}   #Validate email format ; Why are '+' not valid in local part ?
 
 
 
